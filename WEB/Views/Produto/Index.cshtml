@@ -1,49 +1,72 @@
 ﻿@model IEnumerable<WEB.ViewModels.ProdutoViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecoCusto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecoVenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProdutoComposto)
-        </th>
-        <th></th>
-    </tr>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Produtos</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Produtos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrecoCusto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrecoVenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProdutoComposto)
-        </td>
-        <td>
-            @if (item.ProdutoComposto)
+<div class="content">
+    <div class="container-fluid">
+
+        <p>
+            @Html.ActionLink("Novo Produto", "Create", null, new { @class="btn btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecoCusto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrecoVenda)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdutoComposto)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
             {
-                @Html.ActionLink("Composição", "Create", "ProdutoComposto", new { id = item.ProdutoId } , "")
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecoCusto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecoVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProdutoComposto)
+                    </td>
+                    <td>
+                        @if (item.ProdutoComposto)
+                        {
+                            @Html.ActionLink("Composição", "Create", "ProdutoComposto", new { id = item.ProdutoId }, "")
+                        }
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProdutoId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProdutoId })
+                    </td>
+                </tr>
             }
-            @Html.ActionLink("Edit", "Edit", new { id = item.ProdutoId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ProdutoId })
-        </td>
-    </tr>
-}
 
-</table>
+        </table>
+
+    </div>
+</div>
