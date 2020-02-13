@@ -35,9 +35,13 @@
             @Html.DisplayFor(modelItem => item.ProdutoComposto)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProdutoId })
+            @if (item.ProdutoComposto)
+            {
+                @Html.ActionLink("Composição", "Create", "ProdutoComposto", new { id = item.ProdutoId } , "")
+            }
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProdutoId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProdutoId })
         </td>
     </tr>
 }

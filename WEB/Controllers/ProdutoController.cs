@@ -23,6 +23,7 @@ namespace WEB.Controllers
         public ActionResult Details(int id)
         {
             var viewModel = Mapper.Map<Produto, ProdutoViewModel>(ProdutoService.GetProdutoById(id));
+            viewModel.ProdutosCompostos = ProdutoCompostoService.GetProdutoCompostosByProdutoId(id);
             return View(viewModel);
         }
 

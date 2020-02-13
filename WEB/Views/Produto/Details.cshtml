@@ -52,6 +52,28 @@
 
     </dl>
 </div>
+
+
+@if (Model.ProdutoComposto)
+{
+    <div>
+        <h4>Produtos Composição</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            @foreach (var prod in Model.ProdutosCompostos)
+            {
+                <dt>
+                    @prod.ProdutoComposicao.Nome
+                </dt>
+
+                <dd>
+                    @prod.Quantidade Unidades
+                </dd>
+            }
+
+        </dl>
+    </div>
+}
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProdutoId }) |
     @Html.ActionLink("Back to List", "Index")

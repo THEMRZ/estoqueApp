@@ -20,12 +20,16 @@ namespace WEB.Controllers
         }
 
         // GET: Produto/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.ProdutoComposicaoId = new SelectList(ProdutoService.GetOnlyProdutosCompostos(), "ProdutoId","Nome");
-            ViewBag.ProdutoId = new SelectList(ProdutoService.GetOnlyProdutos(), "ProdutoId", "Nome");
+            var viewModel = new ProdutoCompostoViewModel()
+            {
+                ProdutoId = id
+            };
+            ViewBag.ProdutoComposto = ProdutoService.GetProdutoById(id).Nome;
+            ViewBag.ProdutoComposicaoId = new SelectList(ProdutoService.GetOnlyProdutos(), "ProdutoId", "Nome");
 
-            return View();
+            return View(viewModel);
         }
 
         // POST: Produto/Create

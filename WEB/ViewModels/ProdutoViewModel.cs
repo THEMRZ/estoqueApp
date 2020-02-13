@@ -34,6 +34,6 @@ namespace WEB.ViewModels
 
         public bool Liberado { get; set; }
 
-        public virtual ICollection<RequisicaoProduto> RequisicoesProdutos { get; set; }
+        public List<ProdutoComposto> ProdutosCompostos { get; set; }
     }
 }

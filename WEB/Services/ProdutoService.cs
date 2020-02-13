@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WEB.Models;
+using WEB.ViewModels;
 
 namespace WEB.Services
 {
@@ -41,11 +42,12 @@ namespace WEB.Services
             }
         }
 
+
         public static Produto GetProdutoById(int id)
         {
             using (var _db = new ApplicationDbContext())
             {
-                return _db.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+                return _db.Produtos.FirstOrDefault(p => p.ProdutoId == id);   
             }
         }
 

@@ -56,5 +56,14 @@ namespace WEB.Services
                 _db.SaveChanges();
             }
         }
+
+        public static List<ProdutoComposto> GetProdutoCompostosByProdutoId(int produtoId)
+        {
+            using (var _db = new ApplicationDbContext())
+            {
+                return _db.ProdutosCompostos.Include(x => x.ProdutoComposicao).Where(x => x.ProdutoId == produtoId).ToList();
+            }
+        }
+
     }
 }
