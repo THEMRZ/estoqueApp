@@ -15,6 +15,7 @@ namespace WEB.AutoMapper
         {
             Mapper.CreateMap<Produto, ProdutoViewModel>();
             Mapper.CreateMap<ProdutoComposto, ProdutoCompostoViewModel>();
+            Mapper.CreateMap<Requisicao, RequisicaoViewModel>();
         }
     }
 }
