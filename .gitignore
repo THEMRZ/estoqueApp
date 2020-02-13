@@ -37,3 +37,5 @@ msbuild.wrn
 .vs/
 
 WEB/obj/
+
+WEB/bin/

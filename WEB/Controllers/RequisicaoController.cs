@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,11 @@ namespace WEB.Controllers
         // GET: Requisicao/Create
         public ActionResult Create()
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new IdentityDbContext()));
+            var user = userManager.FindById(User.Identity.GetUserId());
+            var viewModel = new RequisicaoViewModel();
+
+            viewModel.Usuario = user;
             ViewBag.ProdutoId = new SelectList(ProdutoService.GetAllProdutos(), "ProdutoId", "Nome");
             return View();
         }
