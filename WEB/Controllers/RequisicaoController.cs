@@ -28,6 +28,7 @@ namespace WEB.Controllers
         // GET: Requisicao/Create
         public ActionResult Create()
         {
+            ViewBag.ProdutoId = new SelectList(ProdutoService.GetAllProdutos(), "ProdutoId", "Nome");
             return View();
         }
 
