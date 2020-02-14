@@ -30,8 +30,9 @@ namespace WEB.Controllers
         // GET: Requisicao/Create
         public ActionResult Create()
         {
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new IdentityDbContext()));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var user = userManager.FindById(User.Identity.GetUserId());
+         
             var viewModel = new RequisicaoViewModel();
 
             viewModel.Usuario = user;

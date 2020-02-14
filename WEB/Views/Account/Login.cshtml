@@ -21,81 +21,84 @@
         display: flex;
     }
 
-    .square {
-        background-color: #fff;
+    .square1 {
         margin: auto;
+    }
+
+    .square2 {
+        width: 400px;
+        height: 370px;
+        background-color: #fff;
         border-radius: 20px;
         box-shadow: 2px 3px 36px -9px rgba(0,0,0,0.75);
-        padding: 10px;
+        padding: 24px;
     }
 
     .imagem {
-        position: absolute;
-        margin-left: 120px;
-        margin-top: 80px;
         background-color: #555b61;
         border-radius: 100px;
         padding: 4px;
+        position: absolute;
+        margin-left: 135px;
+        margin-top: -110px;
     }
 </style>
 <div style="display:flex; flex-direction:column; margin: 0 auto;">
-    <div>
+    <div class="square1">
         <img src="/Content/images/adminlte/AdminLTELogo.png" alt="AdminLTE Logo" class="imagem">
-    </div>
-    <div class="square">
-        <div class="col-md-12" style="margin-top: 20px;">
-            <section id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Use uma conta local para fazer o logon</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            <p>
-                                <span class="nav-icon fas fa-home"></span>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            </p>
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+        <div class="square2">
+            <div class="col-md-12" style="margin-top: 20px;">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4>Use uma conta local para fazer o logon</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                <p>
+                                    <span class="nav-icon fas fa-home"></span>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                </p>
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group" style="">
-                        <div class="col-md-offset-2 col-md-5">
-                            <input type="submit" value="Logon" class="btn btn-success" />
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        @Html.ActionLink("Registre-se", "Register", null, new { @class = "btn btn-default" })
-                    </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:flex; justify-content: space-evenly;">
+                            <input type="submit" value="Logon" class="btn btn-success" />
+                            @Html.ActionLink("Registre-se", "Register", null, new { @class = "btn btn-default" })
+                        </div>
 
 
-                    @* Habilite quando a confirmação da conta estiver ativada para a funcionalidade de redefinição de senha
-                        <p>
-                            @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
-                        </p>*@
-                }
-            </section>
-        </div>
-        @*<div class="col-md-4">
-                <section id="socialLoginForm">
-                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        @* Habilite quando a confirmação da conta estiver ativada para a funcionalidade de redefinição de senha
+                            <p>
+                                @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
+                            </p>*@
+                    }
                 </section>
-            </div>*@
+            </div>
+            @*<div class="col-md-4">
+                    <section id="socialLoginForm">
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    </section>
+                </div>*@
+        </div>
     </div>
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>

@@ -11,7 +11,7 @@ namespace WEB.Controllers
     {       
         public ActionResult Index()
         {
-
+            ViewBag.UserName = User.Identity.Name.Substring(0, User.Identity.Name.IndexOf("@"));
             return View();
         }
 
