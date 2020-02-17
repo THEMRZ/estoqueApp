@@ -41,7 +41,7 @@ namespace WEB.Controllers
                 var model = Mapper.Map<ProdutoCompostoViewModel, ProdutoComposto>(viewModel);
                 ProdutoCompostoService.Add(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Produto", null);
             }
             return View(viewModel);
         }

@@ -98,5 +98,16 @@ namespace WEB.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public JsonResult AdicionarProduto (int produtoId, int quantidade)
+        {
+            var produto = ProdutoService.GetProdutoById(produtoId);
+
+            var html = "<td> </td>";
+
+            return Json(new { status = false, info = "error", message = "Formulário não preenchido!" }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
