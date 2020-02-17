@@ -31,13 +31,14 @@ namespace WEB.Controllers
         public ActionResult Create()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var user = userManager.FindById(User.Identity.GetUserId());
          
             var viewModel = new RequisicaoViewModel();
+            viewModel.Usuario = userManager.FindById(User.Identity.GetUserId());
+            viewModel.NomeUsuario = viewModel.Usuario.UserName.Substring(0, viewModel.Usuario.UserName.IndexOf("@"));
 
-            viewModel.Usuario = user;
             ViewBag.ProdutoId = new SelectList(ProdutoService.GetAllProdutos(), "ProdutoId", "Nome");
-            return View();
+
+            return View(viewModel);
         }
 
         // POST: Requisicao/Create

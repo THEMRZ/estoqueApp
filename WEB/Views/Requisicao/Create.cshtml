@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Create";
 }
-
+<style>
+    .addProd{
+        margin-top:7px;
+    }
+</style>
 <h2>Create</h2>
 
 
@@ -11,33 +15,64 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="invoice">
         <h4>Requisição de Produtos</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("Selecione um produto para adicionar")
-            <div class="col-md-10">
-                @Html.DropDownList("ProdutoId", String.Empty)
+        <div style="display:flex; flex-direction:row;">
+            <div class="col-md-9">
+                <label>Usuário</label>
+                <div>
+                    @Html.DisplayFor(m => m.NomeUsuario)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Data Requisição</label>
+                <div class='time-frame'>
+                    <div id='date-part'></div>
+                    <div id='time-part'></div>
+                </div>
             </div>
         </div>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group" style="display:flex; flex-direction:row">
+        <div class="col-md-4">
+            <div>
+                @Html.Label("Selecione para adicionar")
+            </div>
+            @Html.DropDownList("ProdutoId", String.Empty)
+        </div>
+        <div class="col-md-1">
+            <div>
+                <label>Quantidade</label>
+            </div>
+           <input type="number" class="form-control" />
+        </div>
+        <div class="col-md-7">
+            <div>
+                <label></label>
+            </div>
+            <div class="btn btn-default addProd">Adicionar</div>
+        </div>
+    </div>
 
         <h4>Produtos Inclusos</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
+        <tr>
+            <td>
                 Nome
-            </dt>
-            <dd>
+            </td>
+            <td>
                 quantidade
-            </dd>
-            <dd>
+            </td>
+            <td>
                 precusto
-            </dd>
-            <dd>
+            </td>
+            <td>
                 subtotal
-            </dd>
-        </dl>
+            </td>
+        </tr>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -53,4 +88,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('#ProdutoId').addClass('form-control');
+            var interval = setInterval(function () {
+                var momentNow = moment();
+                $('#date-part').html(momentNow.format('DD/MM/YYYY'));
+                $('#time-part').html(momentNow.format('A hh:mm:ss'));
+            }, 100);
+
+
+        });
+    </script>
 }
