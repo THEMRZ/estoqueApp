@@ -207,6 +207,7 @@
     <Compile Include="Services\RequisicaoService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProdutoCompostoViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoQtdViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />
     <Compile Include="ViewModels\RequisicaoViewModel.cs" />
   </ItemGroup>

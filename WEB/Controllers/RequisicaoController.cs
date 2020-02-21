@@ -30,6 +30,8 @@ namespace WEB.Controllers
         // GET: Requisicao/Create
         public ActionResult Create()
         {
+            TempData["ListaProdutosReq"] = new List<ProdutoQtdViewModel>();
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
          
             var viewModel = new RequisicaoViewModel();
@@ -43,7 +45,7 @@ namespace WEB.Controllers
 
         // POST: Requisicao/Create
         [HttpPost]
-        public ActionResult Create(RequisicaoViewModel viewModel)
+        public ActionResult Create(RequisicaoViewModel viewModel, List<int> produtos)
         {
             if (ModelState.IsValid)
             {
@@ -103,10 +105,46 @@ namespace WEB.Controllers
         public JsonResult AdicionarProduto (int produtoId, int quantidade)
         {
             var produto = ProdutoService.GetProdutoById(produtoId);
+            AddProdList(produto, quantidade);
 
-            var html = "<td> </td>";
+            var html = "<tr value='"+ produto.ProdutoId +"'><td style='word-break: break-all;'>" + produto.Nome +"</td>" +
+                        "<td>"+quantidade+"</td>" +
+                        "<td>"+produto.PrecoVenda+"</td>" +
+                        "<td>"+(produto.PrecoVenda * quantidade)+"</td>" +
+                        "<td><div class='btn btn-danger'>Remover</div></td></tr>";
 
-            return Json(new { status = false, info = "error", message = "Formulário não preenchido!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { produto = html }, JsonRequestBehavior.AllowGet);
+            
+        }
+
+        public void AddProdList(Produto produto, int quantidade)
+        {
+            List<ProdutoQtdViewModel> produtlist = (List<ProdutoQtdViewModel>)TempData["ListaProdutosReq"];
+            var produtoQtd = new ProdutoQtdViewModel(){
+                ProdutoId = produto.ProdutoId,
+                Produto = produto,
+                Quantidade = quantidade
+            };
+            produtlist.Add(produtoQtd);
+            ViewData["ListaProdutosReq"] = produtlist;
+        }
+
+        public void RemoveProdList(int produtoId)
+        {
+            List<ProdutoQtdViewModel> produtolist = (List<ProdutoQtdViewModel>)TempData["ListaProdutosReq"];
+
+            var removeItem = produtolist.SingleOrDefault(p => p.ProdutoId == produtoId);
+            produtolist.Remove(removeItem);
+
+            ViewData["ListaProdutosReq"] = produtolist;
+        }
+
+        [HttpPost]
+        public JsonResult RemoverProduto(int produtoId)
+        {            
+            RemoveProdList(produtoId);
+
+            return Json(new { result = true  }, JsonRequestBehavior.AllowGet);
         }
 
     }
