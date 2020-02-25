@@ -4,11 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>ProdutoViewModel</h4>
+<div class="titulo-invoice">
+    <h4>Detalhes do Produto</h4>
     <hr />
+</div>
+<div class="invoice">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nome)
@@ -50,29 +50,44 @@
             @Html.DisplayFor(model => model.Liberado)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataAtualizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataAtualizacao.Value)
+        </dd>
     </dl>
+
+
+    @if (Model.ProdutoComposto)
+    {
+        <h4>Produtos Composição</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            @foreach (var prod in Model.ProdutosCompostos)
+            {
+                <dt>
+                    @prod.ProdutoComposicao.Nome
+                </dt>
+
+                <dd>
+                    @prod.Quantidade Unidades
+                </dd>
+            }
+
+        </dl>
+    }
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.ProdutoId }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default", @style = "float:right" })
+    </p>
 </div>
-
-
-@if (Model.ProdutoComposto)
-{
-    <h4>Produtos Composição</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @foreach (var prod in Model.ProdutosCompostos)
-        {
-            <dt>
-                @prod.ProdutoComposicao.Nome
-            </dt>
-
-            <dd>
-                @prod.Quantidade Unidades
-            </dd>
-        }
-
-    </dl>
-}
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProdutoId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

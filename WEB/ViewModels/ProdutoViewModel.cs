@@ -35,5 +35,13 @@ namespace WEB.ViewModels
         public bool Liberado { get; set; }
 
         public List<ProdutoComposto> ProdutosCompostos { get; set; }
+
+        [DisplayName("Data de Cadastro")]
+
+        public DateTime DataCadastro { get; set; }
+
+        [DisplayName("Data de Atualização")]
+
+        public DateTime? DataAtualizacao { get; set; }
     }
 }

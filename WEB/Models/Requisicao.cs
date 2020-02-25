@@ -6,6 +6,11 @@ namespace WEB.Models
 {
     public class Requisicao
     {
+        public Requisicao()
+        {
+            RequisicoesProdutos = new HashSet<RequisicaoProduto>();
+        }
+
         public int RequisicaoId { get; set; }
         public DateTime DataRequisicao { get; set; }
         //public int UsuarioId { get; set; }

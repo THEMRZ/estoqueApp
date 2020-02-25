@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProdutoCompostoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Controllers\RequisicaoController.cs" />
     <Compile Include="EntidadesConfig\ApplicationRolesConfiguration.cs" />
     <Compile Include="EntidadesConfig\ApplicationUserLoginConfiguration.cs" />
@@ -353,6 +354,9 @@
     <Content Include="Scripts\plugins\bootstrap\js\bootstrap.js.map" />
     <Content Include="Scripts\plugins\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Produto\RenderProducts.cshtml" />
+    <Content Include="Views\Requisicao\Details.cshtml" />
+    <Content Include="Views\Relatorio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

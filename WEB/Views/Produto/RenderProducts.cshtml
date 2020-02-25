@@ -1,0 +1,13 @@
+﻿@model List<WEB.ViewModels.ProdutoQtdViewModel>
+
+
+@foreach (var item in Model)
+{
+    <tr value="@item.ProdutoId ">
+        <td style="word-break: break-all;">@item.Produto.Nome</td>
+        <td>@item.Quantidade</td>
+        <td>@item.Produto.PrecoVenda</td>
+        <td>@(item.Produto.PrecoVenda * item.Quantidade)</td>
+        <td><div class='btn btn-danger'>Remover</div></td>
+    </tr>
+}

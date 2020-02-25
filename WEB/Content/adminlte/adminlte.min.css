@@ -45,6 +45,10 @@
     box-sizing: border-box
 }
 
+.titulo-invoice {
+    padding: 20px 25px 0px 25px;
+}
+
 html {
     font-family: sans-serif;
     line-height: 1.15;

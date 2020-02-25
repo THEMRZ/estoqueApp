@@ -1,0 +1,61 @@
+﻿@model WEB.ViewModels.RequisicaoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="titulo-invoice">
+    <h4>Detalhes da Requisição</h4>
+    <hr />
+</div>
+<div class="invoice">   
+    <div style="display:flex; justify-content:space-between">
+        <div class="label">
+            <b>
+                @Html.DisplayNameFor(model => model.NomeUsuario):
+            </b>
+            @Html.DisplayFor(model => model.NomeUsuario)
+        </div>
+        <div class="label">
+            <b>
+                @Html.DisplayNameFor(model => model.DataRequisicao):
+            </b>
+            @Html.DisplayFor(model => model.DataRequisicao)
+        </div>
+    </div>
+    <div style="text-align:center;">
+        <label>Lista de Produtos Inclusos</label>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="500">
+                    Nome
+                </th>
+                <th scope="col" width="50">
+                    Quantidade
+                </th>
+                <th scope="col" width="100">
+                    Preço de Custo
+                </th>
+                <th scope="col" width="100">
+                    Subtotal
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RequisicoesProdutos)
+            {
+                <tr value="@item.ProdutoId ">
+                    <td style="word-break: break-all;">@item.Produto.Nome</td>
+                    <td>@item.Quantidade</td>
+                    <td>@item.Produto.PrecoVenda</td>
+                    <td>@(item.Produto.PrecoVenda * item.Quantidade)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-warning" })
+    </p>
+</div>

@@ -3,37 +3,41 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RequisicaoId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataRequisicao)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequisicaoId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataRequisicao)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="titulo-invoice">
+    <h4>Lista de Requisições</h4>
+    <hr />
+</div>
+<div class="content invoice">
+    <p style="margin-top: 20px;">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Requisitório
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataRequisicao)
+                </th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataRequisicao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.RequisicaoId }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

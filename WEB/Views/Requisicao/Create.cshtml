@@ -50,7 +50,7 @@
                 <div>
                     <label>Quantidade</label>
                 </div>
-                <input type="number" class="form-control" id="qtd" />
+                <input type="number" class="form-control" id="qtd" min="1" onkeyup="if(this.value<0){this.value= this.value * -1}"/>
             </div>
             <div class="col-md-7">
                 <div>
@@ -100,7 +100,7 @@
 
     <script>
         $(document).ready(function () {
-            $("<tr id='placeholder'><td colspan=5 style='text-align:center'>Lista Vazia</td></tr>").appendTo($("#ProdTable"));
+            $("<tr id='placeholder' style='border-bottom: 1px solid #e5e5e5;'><td colspan=5 style='text-align:center'>Lista Vazia</td></tr>").appendTo($("#ProdTable"));
             $('#ProdutoId').addClass('form-control');
            setInterval(function () {
                 var momentNow = moment();
@@ -111,19 +111,19 @@
         });
 
         $(".addProd").click(function () {
-         
+
             var produtoSelect = $("#ProdutoId").children("option:selected").val();
             var quantidade = $("#qtd").val();
             $.ajax({
                 url: "@Url.Action("AdicionarProduto", "Requisicao")",
                 type: 'POST',
-                dataType: 'json',
                 data: { produtoId: produtoSelect, quantidade: quantidade },
-                success: function (result) {                   
+                success: function (result) {
+                    $('#ProdTable tbody').empty();
                     if($('#ProdTable #placeholder').length > 0 ){
                         $('#ProdTable tbody tr')[0].remove()
                     }
-                    $(result.produto).appendTo($("#ProdTable"));                   
+                    $("#ProdTable tbody").html(result);
                 }
             });
         });
@@ -131,13 +131,14 @@
 
         $("#ProdTable").delegate(".btn-danger", "click", function () {    
             var id = $(this).closest("tr").attr('value');
+            var elemento = $(this).closest("tr");
              $.ajax({
                 url: "@Url.Action("RemoverProduto", "Requisicao")",
                 type: 'POST',
                 dataType: 'json',
                 data: { produtoId: id},
                 success: function (result) {                   
-                    $(this).closest("tr").remove()                 
+                    $(elemento).remove()                 
                 }
             });
         });
