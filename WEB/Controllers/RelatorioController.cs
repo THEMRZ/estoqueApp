@@ -9,9 +9,13 @@ namespace WEB.Controllers
     public class RelatorioController : Controller
     {
         // GET: Relatorio
-        public ActionResult Index()
+        public ActionResult SaidaEstoque()
         {
             return View();
         }
+        public ActionResult Requisicoes()
+        {
+            return View();
+        }       
     }
 }

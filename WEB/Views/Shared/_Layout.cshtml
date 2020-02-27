@@ -76,13 +76,28 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="/relatorio" class="nav-link">
-                                    <i class="nav-icon fas fa-file-excel"></i>
+                            <li class="nav-item has-treeview menu-open">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-chart-pie"></i>
                                     <p>
                                         Relatórios
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
+                                <ul class="nav nav-treeview" style="display: block;">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Requisicoes", "Relatorio")" class="nav-link">
+                                            <i class="fas fa-table nav-icon"></i>
+                                            <p>Requisições</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("SaidaEstoque", "Relatorio")" class="nav-link">
+                                            <i class="fas fa-table nav-icon"></i>
+                                            <p>Saída de Estoque</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>
