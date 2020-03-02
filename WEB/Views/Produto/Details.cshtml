@@ -61,10 +61,12 @@
         <dt>
             @Html.DisplayNameFor(model => model.DataAtualizacao)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataAtualizacao.Value)
-        </dd>
+        @if(Model.DataAtualizacao != null)
+        {
+            <dd>
+                @Html.DisplayFor(model => model.DataAtualizacao.Value)
+            </dd>
+        }        
     </dl>
 
 

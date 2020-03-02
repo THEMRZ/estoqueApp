@@ -26,8 +26,9 @@
     }
 
     .square2 {
+        text-align: center;
         width: 400px;
-        height: 370px;
+        height: 400px;
         background-color: #fff;
         border-radius: 20px;
         box-shadow: 2px 3px 36px -9px rgba(0,0,0,0.75);
@@ -35,18 +36,13 @@
     }
 
     .imagem {
-        background-color: #555b61;
-        border-radius: 100px;
-        padding: 4px;
-        position: absolute;
-        margin-left: 135px;
-        margin-top: -110px;
+        width: 60px;
     }
 </style>
 <div style="display:flex; flex-direction:column; margin: 0 auto;">
     <div class="square1">
-        <img src="/Content/images/adminlte/AdminLTELogo.png" alt="AdminLTE Logo" class="imagem">
         <div class="square2">
+            <img src="/Content/images/adminlte/AdminLTELogo.png" alt="AdminLTE Logo" class="imagem">
             <div class="col-md-12" style="margin-top: 20px;">
                 <section id="loginForm">
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

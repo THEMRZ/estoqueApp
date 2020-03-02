@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WEB.Services;
+using WEB.ViewModels;
 
 namespace WEB.Controllers
 {
@@ -11,22 +13,13 @@ namespace WEB.Controllers
     {       
         public ActionResult Index()
         {
-            ViewBag.UserName = User.Identity.Name.Substring(0, User.Identity.Name.IndexOf("@"));
-            return View();
-        }
+            var viewModel = new HomeViewModel() { 
+                ProdutosQuantidade = HomeService.GetQuantidadeProdutosLiberados(),
+                RequisicoesQuantidade = HomeService.GetQuantidadeRequisicoes(),
+                UsuariosQuantidade = HomeService.GetQuantidadeUsuarios()
+            };
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+            return View(viewModel);
+        }      
     }
 }

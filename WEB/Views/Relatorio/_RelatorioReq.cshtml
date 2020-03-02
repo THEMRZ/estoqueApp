@@ -1,0 +1,60 @@
+﻿@model IList<WEB.ViewModels.RelatorioReqViewModel>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th width="200">
+                Nome do Produto
+            </th>
+            <th>
+              Quantidade Requisitada
+            </th>
+            <th>
+              Preço de Custo
+            </th>
+            <th>
+               Preço de Venda
+            </th>
+            <th>
+                <a id="export" class="btn btn-success"><i class="fas fa-download"></i> Exportar</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td width="200">
+                @Html.DisplayFor(modelItem => item.Produto.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoCusto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoVenda)
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        }
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td>
+            @ViewBag.TotalPrecoCusto
+        </td>
+        <td>
+            @ViewBag.TotalPrecoVenda
+        </td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    
+</script>

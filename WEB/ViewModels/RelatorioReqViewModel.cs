@@ -11,5 +11,6 @@ namespace WEB.ViewModels
         public Produto Produto { get; set; }
         public int Quantidade { get; set; }
         public Decimal PrecoCusto { get; set; }
+        public Decimal PrecoVenda { get; set; }
     }
 }

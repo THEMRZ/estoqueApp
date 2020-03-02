@@ -1,26 +1,43 @@
-﻿
+﻿@model IList<WEB.ViewModels.RelatorioReqViewModel>
 @{
     ViewBag.Title = "Requisições";
 }
+<style>
+    .errorMessage{
+        color:red;
+    }
+</style>
 <div class="titulo-invoice">
-    <h4>Relatório de Requisições</h4>
+    <h4>Relatório de Requisições de Produtos</h4>
     <hr />
 </div>
 <div class="invoice">
-    <div class="row">
-
-        <div class="col-md-3">
-            <label>Data Inicio</label>
-            <input type="text" id="dataInicial" class="form-control" />
-        </div>
-        <div class="col-md-3">
-            <label>Data Fim</label>
-            <input type="text" id="dataFinal" class="form-control" />
-        </div>
-        <div class="col-md-1" style="margin-top:30px">
-            <input type="button" value="Gerar Relatório" class="btn btn-success" />
-        </div>
+    <div class="errorMessage">
+        @ViewBag.Error
     </div>
+    @using (Html.BeginForm())
+    {
+        <div class="row" style="margin-bottom: 30px;">
+
+            <div class="col-md-3">
+                <label>Data Inicio</label>
+                <input type="text" id="dataInicial" name="dataInicio" class="form-control datePickerField" value="@(ViewBag.DataInicio ?? String.Empty)" autocomplete="off"/>
+            </div>
+            <div class="col-md-3">
+                <label>Data Fim</label>
+                <input type="text" id="dataFinal" name="dataFim" class="form-control datePickerField" value="@(ViewBag.DataFim ?? String.Empty)" autocomplete="off"/>
+            </div>
+            <div class="col-md-1" style="margin-top:30px">
+                <input type="submit" value="Gerar Relatório" class="btn btn-success" />
+            </div>
+        </div>
+    }
+
+    @if (Model != null && Model.Count > 0)
+    {
+        Html.RenderPartial("~/Views/Relatorio/_RelatorioReq.cshtml", Model);
+
+    }
 </div>
 
 @section scripts
@@ -29,7 +46,7 @@
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#dataInicial').datepicker({
+            $('.datePickerField').datepicker({
                 dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
                 dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -39,15 +56,17 @@
                 nextText: 'Próximo',
                 prevText: 'Anterior'
             });
-            $('#dataFinal').datepicker({
-                dateFormat: 'dd/mm/yy',
-                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                nextText: 'Próximo',
-                prevText: 'Anterior'
+        });
+
+         $("#export").click(function () {
+
+         var tbl = $("table").html();        
+            $.ajax({
+                url: "@Url.Action("Exportar", "Relatorio")",
+                type: 'POST',
+                data: { GridHtml: tbl },
+                success: function (result) {                   
+                }
             });
         });
     </script>

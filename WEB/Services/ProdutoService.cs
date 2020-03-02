@@ -10,11 +10,18 @@ namespace WEB.Services
 {
     public class ProdutoService
     {
-        public static ICollection<Produto> GetAllProdutos()
+        public static ICollection<Produto> GetAllProdutos(string busca = null)
         {
             using (var _db = new ApplicationDbContext())
             {
-                return _db.Produtos.Where(p => !p.Excluido).ToList();
+                if (!string.IsNullOrEmpty(busca))
+                {
+                    return _db.Produtos.Where(p => !p.Excluido && p.Nome.Contains(busca)).OrderBy(p => p.Nome).ToList();
+                }
+                else
+                {
+                    return _db.Produtos.Where(p => !p.Excluido).OrderBy(p => p.Nome).ToList();
+                }
             }
         }
         public static ICollection<Produto> GetOnlyProdutos()
@@ -47,7 +54,7 @@ namespace WEB.Services
         {
             using (var _db = new ApplicationDbContext())
             {
-                return _db.Produtos.FirstOrDefault(p => p.ProdutoId == id);   
+                return _db.Produtos.FirstOrDefault(p => p.ProdutoId == id);
             }
         }
 

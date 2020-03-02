@@ -19,6 +19,14 @@ namespace WEB.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        public ActionResult Index(string buscar)
+        {
+            ViewBag.search = buscar;
+            var viewModel = Mapper.Map<IEnumerable<Produto>, IEnumerable<ProdutoViewModel>>(ProdutoService.GetAllProdutos(buscar));
+            return View(viewModel);
+        }
+
         // GET: Produto/Details/5
         public ActionResult Details(int id)
         {
