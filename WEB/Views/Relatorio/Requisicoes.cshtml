@@ -36,7 +36,12 @@
     @if (Model != null && Model.Count > 0)
     {
         Html.RenderPartial("~/Views/Relatorio/_RelatorioReq.cshtml", Model);
-
+    }
+    else
+    {
+        <div style="text-align: center; width:100%;">
+            <label class="label-info">Nenhum Registro Encontrado na Data Selecionada</label>
+        </div>
     }
 </div>
 

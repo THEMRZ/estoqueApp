@@ -10,6 +10,7 @@ using WEB.ViewModels;
 
 namespace WEB.Controllers
 {
+    [Authorize]
     public class ProdutoController : Controller
     {
         // GET: Produtos

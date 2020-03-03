@@ -9,7 +9,8 @@ using WEB.Services;
 using WEB.ViewModels;
 
 namespace WEB.Controllers
-{    
+{
+    [Authorize]
     public class ProdutoCompostoController : Controller
     {
         // GET: Produto/Details/5

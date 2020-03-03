@@ -8,6 +8,7 @@ using WEB.Services;
 
 namespace WEB.Controllers
 {
+    [Authorize]
     public class RelatorioController : Controller
     {
         // GET: Relatorio

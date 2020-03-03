@@ -48,30 +48,39 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td width="200">
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrecoCusto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrecoVenda)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProdutoComposto)
+                            </td>
+                            <td>
+                                @if (item.ProdutoComposto)
+                                {
+                                    @Html.ActionLink("Composição", "Create", "ProdutoComposto", new { id = item.ProdutoId }, new { @class = "btn btn-default" })
+                                }
+                                @Html.ActionLink("Editar", "Edit", new { id = item.ProdutoId }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Detalhes", "Details", new { id = item.ProdutoId }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Deletar", "Delete", new { id = item.ProdutoId }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td width="200">
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PrecoCusto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PrecoVenda)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProdutoComposto)
-                        </td>
-                        <td>
-                            @if (item.ProdutoComposto)
-                            {
-                                @Html.ActionLink("Composição", "Create", "ProdutoComposto", new { id = item.ProdutoId }, new { @class = "btn btn-default" })
-                            }
-                            @Html.ActionLink("Editar", "Edit", new { id = item.ProdutoId }, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("Detalhes", "Details", new { id = item.ProdutoId }, new { @class = "btn btn-info" })
-                            @Html.ActionLink("Deletar", "Delete", new { id = item.ProdutoId }, new { @class = "btn btn-danger" })
-                        </td>
+                        <td colspan="5" style="text-align:center">Nenhum Registro Encontrado</td>
                     </tr>
                 }
             </tbody>

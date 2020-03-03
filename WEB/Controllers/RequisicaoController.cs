@@ -12,6 +12,7 @@ using WEB.ViewModels;
 
 namespace WEB.Controllers
 {
+    [Authorize]
     public class RequisicaoController : Controller
     {
         // GET: Requisicao
