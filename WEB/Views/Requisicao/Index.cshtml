@@ -24,18 +24,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRequisicao)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.RequisicaoId }, new { @class = "btn btn-info" })
+                        </td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Usuario.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataRequisicao)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Detalhes", "Details", new { id = item.RequisicaoId }, new { @class = "btn btn-info" })
-                    </td>
+                    <td colspan="5" style="text-align:center">Nenhum Registro Encontrado</td>
                 </tr>
             }
         </tbody>

@@ -127,7 +127,7 @@ namespace WEB.Controllers
 
             if (produtlist.Any(p => p.ProdutoId == produto.ProdutoId))
             {
-                produtlist.First(p => p.ProdutoId == produto.ProdutoId).Quantidade = quantidade;
+                produtlist.First(p => p.ProdutoId == produto.ProdutoId).Quantidade += quantidade;
             }
             else
             {

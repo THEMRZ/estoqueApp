@@ -72,23 +72,23 @@ namespace WEB.Services
                         var produtos = ProdutoCompostoService.GetProdutoCompostosByProdutoId(item.ProdutoId);
                         foreach (var produto in produtos)
                         {
-                            var itemAdd = new RelatorioSaidaEstqViewModel
+                            var produtoGet = new RelatorioSaidaEstqViewModel
                             {
-                                Quantidade = produto.Quantidade,
+                                Quantidade = produto.Quantidade * item.Quantidade,
                                 Produto = produto.ProdutoComposicao,
-                                PrecoCusto = produto.ProdutoComposicao.PrecoCusto
+                                PrecoCusto = produto.ProdutoComposicao.PrecoCusto * item.Quantidade
                             };
 
                             if (viewModel.Any(x => x.Produto.ProdutoId == produto.ProdutoComposicaoId))
                             {
-                                var itemExistente = viewModel.FirstOrDefault(x => x.Produto.ProdutoId == produto.ProdutoComposicaoId);
-                                itemExistente.Quantidade += produto.Quantidade;
-                                itemExistente.PrecoCusto = itemExistente.Quantidade * itemExistente.Produto.PrecoCusto;
+                                produtoGet = viewModel.FirstOrDefault(x => x.Produto.ProdutoId == produto.ProdutoComposicaoId);
+                                produtoGet.Quantidade += (produto.Quantidade * item.Quantidade);
+                                produtoGet.PrecoCusto = produtoGet.Quantidade * produto.ProdutoComposicao.PrecoCusto;
+
+                                viewModel.Remove(produtoGet);
                             }
-                            else
-                            {
-                                viewModel.Add(itemAdd);
-                            }
+
+                            viewModel.Add(produtoGet);
                         }
 
                     }
@@ -103,14 +103,15 @@ namespace WEB.Services
 
                         if (viewModel.Any(x => x.Produto.ProdutoId == item.ProdutoId))
                         {
-                            var itemExistente = viewModel.FirstOrDefault(x => x.Produto.ProdutoId == item.ProdutoId);
-                            itemExistente.Quantidade += item.Quantidade;
-                            itemExistente.PrecoCusto = itemExistente.Quantidade * itemExistente.Produto.PrecoCusto;
+                            itemAdd = viewModel.FirstOrDefault(x => x.Produto.ProdutoId == item.ProdutoId);
+                            itemAdd.Quantidade += item.Quantidade;
+                            itemAdd.PrecoCusto = itemAdd.Quantidade * itemAdd.Produto.PrecoCusto;
+
+                            viewModel.Remove(itemAdd);
                         }
-                        else
-                        {
-                            viewModel.Add(itemAdd);
-                        }
+  
+                        viewModel.Add(itemAdd);
+                    
                     }
                 };
             }

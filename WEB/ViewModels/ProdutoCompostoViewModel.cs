@@ -21,5 +21,7 @@ namespace WEB.ViewModels
         public virtual Produto ProdutoComposicao { get; set; }
 
         public int Quantidade { get; set; }
+
+        public virtual List<ProdutoComposto> ListaProdutos { get; set; }
     }
 }

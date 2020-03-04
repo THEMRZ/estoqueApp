@@ -28,10 +28,10 @@
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrecoCusto)
+                R$ @Html.DisplayFor(modelItem => item.PrecoCusto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrecoVenda)
+                R$ @Html.DisplayFor(modelItem => item.PrecoVenda)
             </td>          
         </tr>
         }
@@ -39,10 +39,10 @@
         <td>Total</td>
         <td></td>
         <td>
-            @ViewBag.TotalPrecoCusto
+            R$ @ViewBag.TotalPrecoCusto
         </td>
         <td>
-            @ViewBag.TotalPrecoVenda
+            R$ @ViewBag.TotalPrecoVenda
         </td>
     </tr>
     </tbody>

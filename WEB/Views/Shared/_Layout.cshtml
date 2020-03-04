@@ -79,7 +79,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
@@ -87,7 +87,7 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview" style="display: block;">
+                            <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
                                     <a href="@Url.Action("Requisicoes", "Relatorio")" class="nav-link">
                                         <i class="fas fa-table nav-icon"></i>
@@ -148,6 +148,9 @@
     <script src="~/Scripts/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Scripts/adminlte/adminlte.min.js"></script>
+    <!-- Sweet Alert 2-->
+    <script src="~/Scripts/swal.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

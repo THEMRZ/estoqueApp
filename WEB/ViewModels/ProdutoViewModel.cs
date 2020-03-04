@@ -18,16 +18,12 @@ namespace WEB.ViewModels
         public string Nome { get; set; }
 
         [DisplayName("Preço de Custo")]
-        [DataType(DataType.Currency)]
-        [Range(typeof(decimal), "0", "999999999999")]
         [Required(ErrorMessage = "Preencha um valor")]
-        public decimal PrecoCusto { get; set; }
+        public string PrecoCusto { get; set; }
 
         [DisplayName("Preço de Venda")]
-        [DataType(DataType.Currency)]
-        [Range(typeof(decimal), "0", "999999999999")]
         [Required(ErrorMessage = "Preencha um valor")]
-        public decimal PrecoVenda { get; set; }
+        public string PrecoVenda { get; set; }
 
         [DisplayName("Produto Composto")]
         public bool ProdutoComposto { get; set; }

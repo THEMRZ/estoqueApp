@@ -324,6 +324,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\adminlte\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\swal.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
     <Content Include="Content\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
@@ -341,6 +342,7 @@
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery.maskMoney.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />

@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control", min=1 , onkeyup="if(this.value<0){this.value= this.value * -1}" } })
+                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control", min = 1, onkeyup = "if(this.value<0){this.value= this.value * -1}" } })
                     @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -44,6 +44,37 @@
             </div>
         </div>
     }
+    @if (Model.ListaProdutos != null && Model.ListaProdutos.Count() > 0)
+    {
+        <div style="width: 600px; text-align: center;margin: 0 auto;">
+            <label>Produtos já inclusos</label>
+            <table class="table" style="border: 1px solid black;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Produto
+                        </th>
+                        <th>
+                            Quantidade
+                        </th>
+                        <th>
+                            Ação
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListaProdutos)
+                    {
+                        <tr>
+                            <td>@item.ProdutoComposicao.Nome</td>
+                            <td>@item.Quantidade</td>
+                            <td><div onclick="Remover(@item.ProdutoComposicaoId)" class="btn btn-danger">Remover</div></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -51,5 +82,39 @@
         $(document).ready(function () {
             $('#ProdutoComposicaoId').addClass('form-control');
         });
+
+        function Remover(ProdutoCompostoId) {
+            Swal.fire({
+                title: 'Exclusão!',
+                text: 'Tem certeza de que deseja deletar este item?',
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                     var ProdutoId = $("#ProdutoId").val()
+                    $.ajax({
+                        url: "@Url.Action("RemoverProduto", "ProdutoComposto")",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { produtoCompostoId: ProdutoCompostoId, produtoId: ProdutoId},
+                        success: function (result) {
+                             window.location.assign(window.location.href);
+                        }
+                    });
+                }
+            });
+        }
+
+             @*$.ajax({
+                url: "@Url.Action("RemoverProduto", "Requisicao")",
+                type: 'POST',
+                dataType: 'json',
+                data: { produtoId: id},
+                success: function (result) {
+                    $(elemento).remove()
+                }
+            });*@
     </script>
 }

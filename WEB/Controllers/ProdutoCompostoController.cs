@@ -23,11 +23,14 @@ namespace WEB.Controllers
         // GET: Produto/Create
         public ActionResult Create(int id)
         {
+            var produtoComposto = ProdutoService.GetProdutoById(id);
             var viewModel = new ProdutoCompostoViewModel()
             {
-                ProdutoId = id
+                ProdutoId = id,
+                ListaProdutos = ProdutoCompostoService.GetProdutoCompostosByProdutoId(id).ToList()
             };
-            ViewBag.ProdutoComposto = ProdutoService.GetProdutoById(id).Nome;
+
+            ViewBag.ProdutoComposto = produtoComposto.Nome;
             ViewBag.ProdutoComposicaoId = new SelectList(ProdutoService.GetOnlyProdutos(), "ProdutoId", "Nome");
 
             return View(viewModel);
@@ -40,59 +43,33 @@ namespace WEB.Controllers
             if (ModelState.IsValid)
             {
                 var model = Mapper.Map<ProdutoCompostoViewModel, ProdutoComposto>(viewModel);
-                ProdutoCompostoService.Add(model);
 
-                return RedirectToAction("Index", "Produto", null);
+                if (!ProdutoCompostoService.PossuiProdutoIncluso(model))
+                {
+                    ProdutoCompostoService.Add(model);
+                }
+                else
+                {
+                    ProdutoCompostoService.Update(model);
+                }
             }
-            return View(viewModel);
-        }
 
-        // GET: Produto/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var viewModel = Mapper.Map<Produto, ProdutoViewModel>(ProdutoService.GetProdutoById(id));
+            viewModel.ListaProdutos = ProdutoCompostoService.GetProdutoCompostosByProdutoId(viewModel.ProdutoId).ToList();
+            ViewBag.ProdutoComposicaoId = new SelectList(ProdutoService.GetOnlyProdutos(), "ProdutoId", "Nome");
+            ViewBag.ProdutoComposto = ProdutoService.GetProdutoById(viewModel.ProdutoId).Nome;
 
             return View(viewModel);
         }
 
-        // POST: Produto/Edit/5
+
         [HttpPost]
-        public ActionResult Edit(ProdutoViewModel viewModel)
+        public JsonResult RemoverProduto(int produtoId, int ProdutoCompostoId)
         {
-            if (ModelState.IsValid)
-            {
-                var model = Mapper.Map<ProdutoViewModel, Produto>(viewModel);
-                ProdutoService.Update(model);
+            if(produtoId != null && ProdutoCompostoId != null)
+                ProdutoCompostoService.RemoveComposicao(produtoId, ProdutoCompostoId);
 
-                return RedirectToAction("Index");
-            }
-            return View(viewModel);
-        }
 
-        // GET: Produto/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var viewModel = Mapper.Map<Produto, ProdutoViewModel>(ProdutoService.GetProdutoById(id));
-
-            return View(viewModel);
-        }
-
-        // POST: Produto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var viewModel = Mapper.Map<Produto, ProdutoViewModel>(ProdutoService.GetProdutoById(id));
-            try
-            {
-                ProdutoService.Remove(id);
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View(viewModel);
-            }
+            return Json(new { result = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
